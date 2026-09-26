@@ -35,6 +35,18 @@ from app.core.middleware import RequestContextMiddleware, OriginCheckMiddleware
 APP_DIR = Path(__file__).resolve().parent
 STATIC_DIR = APP_DIR / "static"
 
+# --- ALLOWED ORIGINS (Vercel + Local) ---
+ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:3000",
+    "https://frontend-three-steel-zin3d11qcc.vercel.app",
+    "https://frontend-git-main-vermashivika072s-projects.vercel.app",
+    "https://frontend-j39leu1k6-vermashivika072s-projects.vercel.app",
+    "https://frontend.vercel.app",
+]
+
 
 def create_app() -> FastAPI:
     configure_logging(settings.debug)
@@ -45,18 +57,23 @@ def create_app() -> FastAPI:
         redoc_url=None,
         openapi_url="/api/openapi.json",
     )
+
+    # CORS Middleware - hardcoded allowed origins
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=settings.cors_origins,
+        allow_origins=ALLOWED_ORIGINS,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    # OriginCheckMiddleware - same origins
     app.add_middleware(
         OriginCheckMiddleware,
-        allow_origins=settings.cors_origins,
+        allow_origins=ALLOWED_ORIGINS,
         enabled=settings.origin_check_enabled,
     )
+
     app.add_middleware(RequestContextMiddleware)
     app.add_exception_handler(AppError, app_error_handler)
     app.add_exception_handler(RequestValidationError, validation_error_handler)
