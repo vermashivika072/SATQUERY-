@@ -1,0 +1,411 @@
+/* ============================================================
+ * Security & Sensitive UI Elements
+ * Uses centralized tokens from style.css
+ * ============================================================ */
+
+/* ============================================================
+ * SECURE HEADER & BADGES
+ * ============================================================ */
+
+.secure-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: var(--info-soft);
+  border: 1px solid var(--info);
+  border-radius: var(--radius-md);
+  font-size: 9px;
+  color: var(--info);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+}
+
+.secure-header::before {
+  content: "🔒";
+  font-size: 12px;
+}
+
+.secure-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 6px;
+  background: var(--info-soft);
+  color: var(--info);
+  border-radius: var(--radius-pill);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.secure-badge::before {
+  content: "🔒";
+  font-size: 10px;
+}
+
+/* ============================================================
+ * ENCRYPTED INDICATOR
+ * ============================================================ */
+
+.encrypted-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 8px;
+  color: var(--success);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.encrypted-indicator::before {
+  content: "🔐";
+  font-size: 11px;
+}
+
+/* ============================================================
+ * SENSITIVE DATA MASKING
+ * ============================================================ */
+
+.sensitive-field {
+  background: var(--surface-soft);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  padding: 4px 6px;
+  font-family: monospace;
+  font-size: 9px;
+  color: var(--muted);
+}
+
+.sensitive-field.revealed {
+  background: var(--info-soft);
+  border-style: solid;
+  border-color: var(--info);
+  color: var(--text);
+}
+
+.reveal-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 4px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: 9px;
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+.reveal-button:hover {
+  background: var(--panel2);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ============================================================
+ * SESSION SECURITY
+ * ============================================================ */
+
+.session-secure {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  background: var(--info-soft);
+  border: 1px solid var(--info);
+  border-radius: var(--radius-md);
+  font-size: 10px;
+  color: var(--info);
+}
+
+.session-secure-icon {
+  font-size: 14px;
+}
+
+.session-secure-text {
+  flex: 1;
+  line-height: 1.3;
+}
+
+.session-secure-text b {
+  display: block;
+  font-weight: 600;
+  color: var(--info);
+}
+
+/* ============================================================
+ * LOCK SCREEN
+ * ============================================================ */
+
+.lock-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.lock-screen.blur {
+  backdrop-filter: blur(8px);
+}
+
+.lock-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.lock-card h1 {
+  font-size: 20px;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.lock-card p {
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.lock-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.lock-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.lock-button {
+  width: 100%;
+  height: 36px;
+  background: var(--accent);
+  color: white;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+.lock-button:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.lock-button:disabled {
+  background: var(--muted);
+  border-color: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================================
+ * SECURITY WARNINGS
+ * ============================================================ */
+
+.security-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--danger-soft);
+  border: 1px solid var(--danger);
+  border-left: 4px solid var(--danger);
+  border-radius: var(--radius-md);
+  font-size: 10px;
+  color: var(--danger);
+}
+
+.security-warning-icon {
+  font-size: 14px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.security-warning-text {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.security-warning-text strong {
+  display: block;
+  color: var(--danger);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* ============================================================
+ * AUTHENTICATION FLOW
+ * ============================================================ */
+
+.auth-flow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.auth-step {
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  font-size: 10px;
+  color: var(--text);
+}
+
+.auth-step.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.auth-step.completed {
+  background: var(--success-soft);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.auth-step.error {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.auth-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 11px;
+  margin-right: 6px;
+}
+
+/* ============================================================
+ * PERMISSION CONTROLS
+ * ============================================================ */
+
+.permission-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.permission-item:last-child {
+  border-bottom: none;
+}
+
+.permission-toggle {
+  width: 36px;
+  height: 20px;
+  background: var(--border);
+  border-radius: var(--radius-pill);
+  position: relative;
+  cursor: pointer;
+  transition: background-color var(--motion-fast);
+}
+
+.permission-toggle input:checked + .permission-toggle {
+  background: var(--success);
+}
+
+.permission-toggle::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: left var(--motion-fast);
+}
+
+.permission-toggle input:checked + .permission-toggle::after {
+  left: 18px;
+}
+
+.permission-label {
+  flex: 1;
+  font-size: 10px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.permission-description {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ============================================================
+ * AUDIT LOG
+ * ============================================================ */
+
+.audit-log {
+  font-size: 9px;
+}
+
+.audit-entry {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.audit-entry:last-child {
+  border-bottom: none;
+}
+
+.audit-time {
+  color: var(--muted);
+  white-space: nowrap;
+  font-family: monospace;
+}
+
+.audit-action {
+  flex: 1;
+  color: var(--text);
+}
+
+.audit-status {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.audit-status.success {
+  color: var(--success);
+}
+
+.audit-status.error {
+  color: var(--danger);
+}

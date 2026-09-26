@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GEOAI Platform</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Legacy vanilla shell preserved for reference during React migration.
+    <main id="app" class="app theme-dark">
+      <header class="app-menu">
+        <div class="brand"><span class="brand-mark">G</span> GEOAI <b>PLATFORM</b></div>
+        <nav class="menus" aria-label="Application menu">
+          <div class="menu-wrap"><button class="menu-trigger" data-menu="file">File</button><div class="dropdown" id="file-menu"></div></div>
+          <div class="menu-wrap"><button class="menu-trigger" data-menu="view">View</button><div class="dropdown" id="view-menu"></div></div>
+          <div class="menu-wrap"><button class="menu-trigger" data-menu="analysis">Analysis</button><div class="dropdown" id="analysis-menu"></div></div>
+          <div class="menu-wrap"><button class="menu-trigger" data-menu="reports">Reports</button><div class="dropdown" id="reports-menu"></div></div>
+        </nav>
+        <label class="global-search"><span>⌕</span><input aria-label="Global search" placeholder="Search workspace" /><kbd>Ctrl K</kbd></label>
+        <div class="top-actions">
+          <button id="theme-toggle" class="icon-btn" title="Toggle theme (F3)">◐ <span>Theme</span></button>
+          <button class="icon-btn shortcut" title="Keyboard shortcuts">⌘</button>
+          <button class="icon-btn" data-open="Mission">◈ <span>Missions</span></button>
+          <button class="icon-btn" data-open="Story">▤ <span>Story</span></button>
+          <button class="icon-btn notification" title="Notifications">♢<i></i></button>
+          <span class="window-controls"><button title="Minimize">—</button><button title="Maximize">□</button><button title="Close">×</button></span>
+        </div>
+      </header>
+
+      <section class="context-bar" aria-label="Domain contexts">
+        <span class="context-label">ACTIVE DOMAIN</span>
+        <div id="contexts" class="contexts"></div>
+        <span class="context-status"><i></i> Simulation environment</span>
+      </section>
+
+      <section class="work-area">
+        <aside id="left-sidebar" class="left-sidebar" aria-label="Chat and history workspace">
+          <div class="sidebar-heading"><span class="panel-glyph">◫</span><span class="side-text">CHAT &amp; HISTORY</span><button id="left-collapse" class="collapse-btn" title="Collapse sidebar">‹</button></div>
+          <div class="sidebar-scroll side-text">
+            <button id="new-session" class="new-session">＋ New Session <kbd>Ctrl N</kbd></button>
+            <section class="side-section"><h3>ANALYSIS HISTORY</h3><button>Bihar Flood Analysis <small>Today, 09:42</small></button><button>Hyderabad Encroachment <small>Yesterday</small></button><button>Odisha Cyclone <small>21 Aug</small></button><button>Urban Growth Study <small>18 Aug</small></button><button>Vegetation Analysis <small>12 Aug</small></button></section>
+            <section class="side-section"><h3>DOMAIN CONTEXTS</h3><button>▣ Satellite / AI</button><button>▤ Urban Parcel</button><button>◈ Disaster Intelligence</button><button>☁ Weather Intelligence</button></section>
+            <section class="side-section"><h3>FLOATING SUITES</h3><button data-open="Spatial Feature Extraction">◌ Spatial Extraction</button><button data-open="AI Insights">✦ Executive Insights</button><button data-open="Layer Laboratory">▤ Layer Laboratory</button></section>
+          </div>
+        </aside>
+        <div id="left-resizer" class="dock-resizer left-resizer" title="Resize chat & history"></div>
+
+        <section id="map-workspace" class="map-workspace" aria-label="Central map workspace">
+          <div id="map" class="map map-2d">
+            <div class="map-grid"></div><div class="terrain terrain-one"></div><div class="terrain terrain-two"></div><div class="river"></div>
+            <div class="road r1"></div><div class="road r2"></div><div class="road r3"></div><div class="road r4"></div><div class="blocks"></div>
+            <div class="map-label city-a">JHARKHAND</div><div class="map-label city-b">RANCHI</div><div class="map-label city-c">DALMA WILDLIFE SANCTUARY</div>
+            <div class="aoi"><span>ACTIVE AOI · 142.5 km²</span></div><div class="map-coords">85°19' E &nbsp; 23°21' N</div>
+            <div id="globe-orb" class="globe-orb"><div></div></div>
+          </div>
+
+          <div id="map-toolbar" class="floating-toolbar draggable-tool">
+            <button class="base-btn">Base: <b>OSM Standard</b>⌄</button><span class="toolbar-line"></span>
+            <button title="Add point">● <span>Point</span></button><button title="Draw rectangle">□ <span>Rect</span></button><button title="Draw polygon">△ <span>Poly</span></button><span class="toolbar-line"></span>
+            <button data-open="Spectral Analysis">◉ <span>Spectral</span></button><button data-open="Change Detection">↯ <span>Change Detection</span></button><button data-open="Explain Area">✦ <span>Explain Area</span></button>
+          </div>
+          <div class="workspace-switcher"><div id="panel-tabs" class="segmented"><button class="active" data-panel="Layers">Layers</button><button data-panel="Insights">Insights</button><button data-panel="Features">Features</button><button data-panel="Story">Story</button></div><div id="view-tabs" class="segmented view-tabs"><button class="active" data-view="2d">2D GIS</button><button data-view="3d">3D Terrain</button><button data-view="globe">Globe View</button></div></div>
+          <div id="map-legend" class="map-legend"><div class="legend-title">ACTIVE LAYER LEGENDS <button id="legend-collapse">—</button></div><div class="legend-body"><p><i class="veg"></i> NDVI Vegetation</p><p><i class="flood"></i> Flood Hazard</p><p><i class="parcel"></i> Parcel Encroachment</p><p><i class="weather"></i> Weather Anomaly</p></div></div>
+          <div class="map-controls"><button title="Zoom in">+</button><button title="Zoom out">−</button><button title="Reset bearing">⌖</button><button title="Toggle fullscreen">⛶</button></div>
+          <div id="windows-layer" class="windows-layer" aria-live="polite"></div>
+        </section>
+
+        <div id="right-resizer" class="dock-resizer" title="Resize tool dock"></div>
+        <aside id="right-dock" class="right-dock" aria-label="Contextual tool dock">
+          <div class="dock-heading"><span>CONTEXT TOOLS</span><button id="right-collapse" class="collapse-btn" title="Collapse tool dock">›</button></div>
+          <div id="dock-tabs" class="dock-tabs"><button class="active" data-dock="Layers">▤ <span>Layers</span></button><button data-dock="Insights">✦ <span>Insights</span></button><button data-dock="Features">⌘ <span>Features</span></button><button data-dock="Story">▣ <span>Story</span></button><button data-dock="Inspector">◉ <span>Inspector</span></button></div>
+          <div class="dock-content" id="dock-content"></div>
+        </aside>
+      </section>
+
+      <section id="timeline" class="timeline"><div class="timeline-head"><strong>TIMELINE</strong><span>SIMULATED OBSERVATION ARCHIVE</span><button id="timeline-hide" title="Hide timeline">—</button></div><div class="timeline-main"><button id="play-btn" class="play" title="Play timeline">▶</button><div class="speed"><button class="active">1×</button><button>2×</button><button>5×</button></div><span>2010</span><input id="time-range" type="range" min="2010" max="2026" value="2023" aria-label="Timeline year" /><span>2026</span><output id="time-out">14 Sep 2023</output><button class="compare">⌇ Compare</button></div></section>
+      <button id="timeline-show" class="timeline-show">Show Timeline</button>
+      <footer id="status-bar" class="status-bar"><span><b>SIMULATED DATA</b></span><span>AOI AREA <strong>142.5 km²</strong></span><span>VEGETATION CHANGE <strong class="positive">+12.4%</strong></span><span>BUILT-UP CHANGE <strong class="warm">+4.1%</strong></span><span>WATER CHANGE <strong class="blue">+18.2%</strong></span><span>HAZARD RISK <strong class="risk">MODERATE</strong></span><span class="status-right">EPSG:4326 · WGS 84</span></footer>
+    </main> -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

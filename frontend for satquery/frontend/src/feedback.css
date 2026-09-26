@@ -1,0 +1,357 @@
+/* ============================================================
+ * Feedback & Toast Notifications
+ * Uses centralized tokens from style.css
+ * ============================================================ */
+
+.feedback-container {
+  position: fixed;
+  bottom: 60px;
+  right: 12px;
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 350px;
+}
+
+.feedback-toast {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-md);
+  font-size: 10px;
+  color: var(--text);
+  animation: slideInRight 0.3s ease-out;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.feedback-toast.success {
+  border-left-color: var(--success);
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.feedback-toast.warning {
+  border-left-color: var(--warning);
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.feedback-toast.danger,
+.feedback-toast.error {
+  border-left-color: var(--danger);
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.feedback-toast.info {
+  border-left-color: var(--info);
+  background: var(--info-soft);
+  color: var(--info);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.feedback-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.feedback-message {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.feedback-close {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--motion-fast);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.feedback-close:hover {
+  opacity: 1;
+}
+
+/* ============================================================
+ * INLINE ALERTS
+ * ============================================================ */
+
+.alert {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  font-size: 10px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.alert.success {
+  background: var(--success-soft);
+  border-color: var(--success);
+  border-left-color: var(--success);
+  color: var(--success);
+}
+
+.alert.warning {
+  background: var(--warning-soft);
+  border-color: var(--warning);
+  border-left-color: var(--warning);
+  color: var(--warning);
+}
+
+.alert.danger {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  border-left-color: var(--danger);
+  color: var(--danger);
+}
+
+.alert.info {
+  background: var(--info-soft);
+  border-color: var(--info);
+  border-left-color: var(--info);
+  color: var(--info);
+}
+
+/* ============================================================
+ * LOADING STATES
+ * ============================================================ */
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--panel2) 0%,
+    var(--surface-soft) 50%,
+    var(--panel2) 100%
+  );
+  background-size: 200% 100%;
+  animation: pulse 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================================
+ * PROGRESS INDICATORS
+ * ============================================================ */
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+  transition: width var(--motion-normal);
+}
+
+/* ============================================================
+ * TOOLTIPS
+ * ============================================================ */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background: var(--panel);
+  color: var(--text);
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 9px;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transition: opacity var(--motion-fast);
+}
+
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -4px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--panel) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ============================================================
+ * BADGES & PILLS
+ * ============================================================ */
+
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: var(--radius-pill);
+  font-size: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.badge.success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.badge.warning {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.badge.danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.badge.info {
+  background: var(--info-soft);
+  color: var(--info);
+}
+
+.badge.outlined {
+  background: transparent;
+  border: 1px solid currentColor;
+}
+
+/* ============================================================
+ * TAGS & LABELS
+ * ============================================================ */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: var(--surface-soft);
+  color: var(--text);
+  border-radius: var(--radius-pill);
+  font-size: 9px;
+  border: 1px solid var(--border);
+}
+
+.tag:hover {
+  background: var(--panel2);
+  border-color: var(--accent);
+  cursor: pointer;
+}
+
+.tag-remove {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--motion-fast);
+}
+
+.tag-remove:hover {
+  opacity: 1;
+}
+
+/* ============================================================
+ * DIVIDERS & SEPARATORS
+ * ============================================================ */
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 0;
+}
+
+.divider.vertical {
+  width: 1px;
+  height: 100%;
+  margin: 0 8px;
+}
+
+.divider.text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.divider.text::before,
+.divider.text::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}

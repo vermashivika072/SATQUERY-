@@ -1,0 +1,284 @@
+/* ============================================================
+ * Master Fixes & Theme Overrides
+ * Uses centralized tokens from style.css
+ * ============================================================ */
+
+/* Theme-specific domain colors */
+.app {
+  --layer-satellite: var(--accent);
+  --layer-vegetation: #65A30D;
+  --layer-flood: #0284C7;
+  --layer-parcel: #A16207;
+  --layer-weather: #7C3AED;
+}
+
+.theme-bright {
+  --layer-satellite: #2563EB;
+  --layer-vegetation: #52C73A;
+  --layer-flood: #0890D9;
+  --layer-parcel: #C87A2C;
+  --layer-weather: #8B5CF6;
+}
+
+/* ============================================================
+ * DEMO DATA STYLING
+ * ============================================================ */
+
+.demo-badge {
+  font-size: 7px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-left: 3px;
+  padding: 2px 4px;
+  border-radius: var(--radius-xs);
+  background: var(--border);
+}
+
+.demo-shell {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+}
+
+/* ============================================================
+ * DOMAIN-SPECIFIC STYLING
+ * ============================================================ */
+
+.domain-satellite {
+  --layer-color: var(--accent);
+}
+
+.domain-parcel {
+  --layer-color: var(--layer-parcel);
+}
+
+.domain-flood {
+  --layer-color: var(--layer-flood);
+}
+
+.domain-weather {
+  --layer-color: var(--layer-weather);
+}
+
+/* ============================================================
+ * ACTIVE STATE REFINEMENTS
+ * ============================================================ */
+
+.active {
+  background: var(--accent-soft) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: var(--radius-xs);
+}
+
+button.active::after,
+button.timeline-speed-button.active::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ============================================================
+ * HOVER STATE REFINEMENTS
+ * ============================================================ */
+
+/* Narrowed hover - excludes dropdown to preserve menu visuals */
+button:hover:not(.dropdown button),
+.button-like:hover:not(.dropdown button) {
+  background: var(--panel2) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  transition: all var(--motion-fast);
+}
+.dropdown button:hover {
+  background: var(--panel2) !important;
+  border-color: transparent !important;
+  color: var(--text) !important;
+}
+
+/* ============================================================
+ * FOCUS STATE REFINEMENTS
+ * ============================================================ */
+
+button:focus,
+button:focus-visible,
+input:focus,
+input:focus-visible,
+select:focus,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* ============================================================
+ * DISABLED STATE
+ * ============================================================ */
+
+button:disabled,
+input:disabled,
+select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--surface-soft) !important;
+  color: var(--muted) !important;
+}
+
+/* ============================================================
+ * FORM ELEMENTS
+ * ============================================================ */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-family: inherit;
+  font-size: inherit;
+  transition: border-color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="search"]::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+input[type="range"] {
+  accent-color: var(--accent);
+  height: 4px;
+}
+
+/* ============================================================
+ * SCROLLBARS
+ * ============================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Firefox scrollbars */
+* {
+  scrollbar-color: var(--border) var(--bg);
+  scrollbar-width: thin;
+}
+
+/* ============================================================
+ * TYPOGRAPHY REFINEMENTS
+ * ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+em {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+code {
+  background: var(--surface-soft);
+  color: var(--accent);
+  padding: 2px 4px;
+  border-radius: var(--radius-xs);
+  font-family: "Courier New", monospace;
+  font-size: 90%;
+}
+
+/* ============================================================
+ * BREAKPOINT ADJUSTMENTS
+ * ============================================================ */
+
+@media (max-width: 1200px) {
+  .work-area {
+    grid-template-columns: 220px 3px minmax(200px, 1fr) 3px 220px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .work-area {
+    grid-template-columns: 200px 3px minmax(150px, 1fr) 3px 200px;
+  }
+}
+
+/* ============================================================
+ * PRINT STYLES
+ * ============================================================ */
+
+@media print {
+  .app-menu,
+  .context-bar,
+  .timeline,
+  .telemetry,
+  .dock-resizer,
+  button {
+    display: none;
+  }
+
+  .work-area {
+    grid-template-columns: 1fr;
+  }
+
+  .left-sidebar,
+  .right-dock {
+    display: none;
+  }
+}

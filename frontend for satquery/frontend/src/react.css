@@ -1,0 +1,570 @@
+/* ============================================================
+ * React Component Styling
+ * Uses centralized tokens from style.css
+ * ============================================================ */
+
+/* Root elements */
+#root,
+.auth-screen,
+.boot-screen {
+  height: 100%;
+  min-height: 100vh;
+}
+
+.auth-screen,
+.boot-screen {
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ============================================================
+ * WORKSPACE SIDEBAR
+ * ============================================================ */
+
+.left-sidebar {
+  position: relative;
+}
+
+.sidebar-heading {
+  border-top: 1px solid var(--border) !important;
+  background: var(--panel) !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px 8px;
+  text-align: left;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.profile-button b,
+.profile-button small {
+  display: block;
+}
+
+.profile-button small {
+  color: var(--text-secondary);
+  font-size: 9px;
+  margin-top: 2px;
+}
+
+.session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.session-item {
+  padding: 8px 9px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background-color var(--motion-fast),
+    border-color var(--motion-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.session-item:hover {
+  background: var(--panel2);
+}
+
+.session-item.active {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  color: var(--accent);
+}
+
+.session-item > b {
+  font-size: 13.5px;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.session-item > small {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.new-session-btn {
+  height: 32px;
+  margin: 8px;
+  background: var(--accent) !important;
+  color: white !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  transition: all var(--motion-fast);
+}
+
+.new-session-btn:hover {
+  background: var(--accent-hover) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+ * PROFILE & ACCOUNT
+ * ============================================================ */
+
+.profile-button {
+  padding: 8px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--motion-fast);
+}
+
+.profile-button:hover {
+  background: var(--panel2);
+}
+
+.account-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 8px;
+  color: var(--muted);
+}
+
+.account-status i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+/* ============================================================
+ * DROPDOWN & SELECT ELEMENTS
+ * ============================================================ */
+
+select {
+  height: 27px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  padding: 0 6px;
+  border-radius: var(--radius-sm);
+  transition: border-color var(--motion-fast);
+}
+
+select:hover {
+  border-color: var(--accent);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* ============================================================
+ * FLOATING WINDOW SYSTEM
+ * ============================================================ */
+
+.windows-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.windows-layer .floating-window {
+  pointer-events: auto;
+}
+
+.floating-window {
+  position: absolute;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.window-manager {
+  max-width: 520px;
+  flex-wrap: wrap;
+}
+
+.window-body {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.floating-window.active {
+  box-shadow: var(--shadow-md),
+    0 0 0 1px var(--accent);
+  border-color: var(--accent-soft);
+}
+
+.window-titlebar {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  background: var(--panel2);
+  border-bottom: 1px solid var(--border);
+  cursor: move;
+  user-select: none;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.window-titlebar strong {
+  flex: 1;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.drag-icon {
+  color: var(--muted);
+  font-size: 12px;
+  cursor: grab;
+}
+
+.drag-icon:active {
+  cursor: grabbing;
+}
+
+.window-titlebar .demo {
+  margin-left: auto;
+}
+
+.win-spacer {
+  flex: 1;
+}
+
+.win-control {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  border-radius: var(--radius-xs);
+  transition: background-color var(--motion-fast),
+    color var(--motion-fast);
+  font-size: 14px;
+}
+
+.win-control:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.window-resize-handle,
+.resize-handle {
+  position: absolute;
+  background: transparent;
+  z-index: 5;
+}
+
+.window-resize-handle.e,
+.resize-handle.e {
+  right: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.window-resize-handle.w,
+.resize-handle.w {
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.window-resize-handle.n,
+.resize-handle.n {
+  top: 0;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.window-resize-handle.s,
+.resize-handle.s {
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.window-resize-handle.ne,
+.resize-handle.ne {
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nesw-resize;
+}
+
+.window-resize-handle.nw,
+.resize-handle.nw {
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nwse-resize;
+}
+
+.window-resize-handle.se,
+.resize-handle.se {
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nwse-resize;
+}
+
+.window-resize-handle.sw,
+.resize-handle.sw {
+  bottom: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nesw-resize;
+}
+
+/* ============================================================
+ * WINDOW CONTENT
+ * ============================================================ */
+
+.window-content {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+  font-size: 10px;
+}
+
+.window-content p {
+  margin: 0 0 8px 0;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.window-content small {
+  color: var(--muted);
+}
+
+/* ============================================================
+ * COMPARE DIALOG
+ * ============================================================ */
+
+.compare-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.compare-dialog {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.compare-dialog header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.compare-dialog header strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.compare-dialog header small {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.compare-dialog header button {
+  margin-left: auto;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  transition: background-color var(--motion-fast);
+}
+
+.compare-dialog header button:hover {
+  background: var(--panel2);
+  color: var(--text);
+}
+
+.compare-dates {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.compare-dates label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.compare-dates select {
+  min-width: 120px;
+}
+
+.compare-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 15px 0;
+  padding: 10px;
+  background: var(--surface-soft);
+  border-radius: var(--radius-md);
+}
+
+.compare-stats span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 9px;
+}
+
+.compare-stats b {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ============================================================
+ * BUTTONS & CONTROLS
+ * ============================================================ */
+
+button.primary,
+.auth-submit {
+  background: var(--accent) !important;
+  color: white !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+button.primary:hover,
+.auth-submit:hover {
+  background: var(--accent-hover) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+button.secondary {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-weight: 500;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+button.secondary:hover {
+  background: var(--panel2) !important;
+  border-color: var(--accent) !important;
+}
+
+button.tertiary {
+  background: transparent !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-weight: 500;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+button.tertiary:hover {
+  background: var(--accent-soft) !important;
+  border-color: var(--accent-hover) !important;
+  color: var(--accent-hover) !important;
+}
+
+/* ============================================================
+ * BADGES & STATUS
+ * ============================================================ */
+
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: var(--radius-pill);
+  font-size: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.badge.success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.badge.warning {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.badge.danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.badge.info {
+  background: var(--info-soft);
+  color: var(--info);
+}

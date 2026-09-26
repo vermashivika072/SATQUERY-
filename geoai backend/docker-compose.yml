@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgis/postgis:15-3.4
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-geoai}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-geoai}
+      POSTGRES_DB: ${POSTGRES_DB:-geoai}
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-geoai}"]
+      interval: 5s
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY:-minio}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY:-minio12345}
+    ports: ["9000:9000", "9001:9001"]
+    volumes: [miniodata:/data]
+
+volumes:
+  pgdata:
+  miniodata:

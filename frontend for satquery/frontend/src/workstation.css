@@ -1,0 +1,1078 @@
+/* ============================================================
+ * Workstation Layout & Components
+ * Uses centralized tokens from style.css
+ * ============================================================ */
+
+/* ============================================================
+ * WORKSPACE LAYOUT
+ * ============================================================ */
+
+.work-area {
+  position: relative;
+  transition: grid-template-columns 0.2s ease;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 250px 4px minmax(300px, 1fr) 4px 260px;
+  gap: 0;
+  padding: 12px;
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.work-area { z-index: var(--z-workspace); }
+.left-sidebar { grid-column: 1; }
+.chat-resizer { grid-column: 2; }
+.map-workspace { grid-column: 3; min-width: 0; min-height: 0; width: 100%; height: 100%; }
+.copilot-resizer { grid-column: 4; }
+.right-dock { grid-column: 5; }
+.dock-resizer.is-disabled { pointer-events: none; opacity: 0.3; }
+
+.work-area.timeline-hidden {
+  grid-template-rows: minmax(0, 1fr) 62px;
+}
+
+.workspace-dock,
+.right-dock {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.panel-shell {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* collapsed side now 0px via grid - no slab */
+.workspace-dock.is-collapsed {
+  min-width: auto;
+}
+
+/* Dock resizer */
+.dock-resizer {
+  width: 5px;
+  cursor: col-resize;
+  background: var(--border);
+  transition: background-color var(--motion-fast);
+}
+
+.dock-resizer:hover {
+  background: var(--accent);
+}
+
+/* ============================================================
+ * SIDEBAR - LEFT DOCK (Chat & History)
+ * ============================================================ */
+
+.left-sidebar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.sidebar-scroll {
+  height: calc(100% - 83px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  background: var(--panel);
+}
+
+.sidebar-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9px;
+  letter-spacing: 0.7px;
+  color: var(--muted);
+  margin: 0 0 7px;
+  padding: 0 9px;
+  text-transform: uppercase;
+  font-weight: 600;
+  background: var(--panel2);
+  border-bottom: 1px solid var(--border);
+  min-height: 28px;
+}
+
+/* ============================================================
+ * RIGHT DOCK (AI Map Copilot)
+ * ============================================================ */
+
+.right-dock.copilot {
+  min-height: 0;
+}
+
+.copilot-dock {
+  position: relative;
+  overflow: hidden;
+  z-index: var(--z-copilot);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* removed legacy copilot-restore - use copilot-collapsed-tab */
+/* removed legacy copilot-dock.is-collapsed rules - now renders only button */
+.copilot-shell {
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 34px minmax(0, 1fr) auto 43px;
+  background: var(--panel);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.copilot-shell-header {
+  display: flex;
+  align-items: center;
+  padding: 0 9px;
+  background: var(--panel2);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.copilot-shell-header .collapse-btn {
+  margin-left: auto;
+  width: 23px;
+  height: 23px;
+  color: var(--text);
+  font-size: 16px;
+  border-radius: var(--radius-xs);
+  transition: background-color var(--motion-fast);
+}
+
+.copilot-shell-header .collapse-btn:hover {
+  background: var(--bg);
+}
+
+.memory-badge {
+  margin-left: 8px;
+  padding: 3px 5px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: 0.2px;
+  text-transform: none;
+}
+
+.memory-badge.cache-hit {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.copilot-chat {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.copilot-chat article {
+  max-width: 95%;
+  margin: 0;
+  padding: 7px;
+  border-left: 3px solid var(--accent);
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--motion-fast);
+}
+
+.copilot-chat article.user {
+  margin-left: auto;
+  border-left: 0;
+  border-right: 3px solid var(--accent-secondary);
+  background: var(--panel2);
+}
+
+.copilot-chat p {
+  margin: 0;
+  white-space: pre-line;
+  line-height: 1.42;
+  font-size: 10px;
+  color: var(--text);
+}
+
+.copilot-chat small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.copilot-presets {
+  border-top: 1px solid var(--border);
+  padding: 7px 8px;
+  background: var(--panel);
+}
+
+.copilot-presets > b {
+  display: block;
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: 0.7px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.copilot-presets div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.copilot-presets button {
+  padding: 4px 5px;
+  border: 1px solid var(--border) !important;
+  background: var(--bg) !important;
+  color: var(--text);
+  font-size: 9px;
+  border-radius: var(--radius-sm);
+  transition: all var(--motion-fast);
+}
+
+.copilot-presets button:hover {
+  background: var(--panel2) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent);
+}
+
+.copilot-composer {
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+
+.memory-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 0 2px 5px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.memory-controls label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.memory-controls input {
+  accent-color: var(--accent);
+}
+
+.memory-controls button {
+  height: 22px;
+  padding: 0 6px;
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.copilot-composer input {
+  flex: 1;
+  height: 28px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 0 6px;
+  font-size: 10px;
+  transition: border-color var(--motion-fast);
+}
+
+.copilot-composer input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.copilot-composer input::placeholder {
+  color: var(--muted);
+}
+
+.copilot-composer button {
+  height: 28px;
+  padding: 0 10px;
+  background: var(--accent) !important;
+  color: white !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: var(--radius-sm);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  transition: all var(--motion-fast);
+}
+
+.copilot-composer button:hover {
+  background: var(--accent-hover) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.copilot-dock.drag-over {
+  outline: 2px dashed var(--accent);
+  outline-offset: -2px;
+  background: color-mix(in srgb, var(--accent-soft) 50%, var(--panel));
+}
+
+.copilot-dock.drag-over .copilot-shell {
+  background: transparent;
+}
+
+.attachment-strip {
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+  padding: 6px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.attached-chip {
+  max-width: 160px;
+  overflow: hidden;
+}
+
+.copilot-composer .paperclip-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+}
+
+.copilot-composer .paperclip-btn:hover {
+  color: var(--accent);
+  background: var(--panel2);
+  border-color: var(--border);
+}
+
+.copilot-composer button[aria-label="Send"] {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.copilot-composer input {
+  min-width: 0;
+}
+
+/* ============================================================
+ * DOCK RAIL BUTTON (Collapsed state)
+ * ============================================================ */
+
+/* removed legacy dock-rail-button - replaced by chat/copilot-collapsed-tab */
+/* ============================================================
+ * TELEMETRY / STATUS BAR
+ * ============================================================ */
+
+.bottom-dock-container {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100%;
+  gap: 8px !important;
+  padding: 8px 12px !important;
+  background-color: var(--bg-app) !important;
+}
+
+.timeline-card-wrapper {
+  position: relative !important;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  background-color: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  box-shadow: none !important;
+}
+
+.timeline-controls-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100%;
+  gap: 16px !important;
+}
+
+
+
+.telemetry-grid-fix {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  background-color: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  margin-top: 6px !important;
+}
+
+.telemetry-cell {
+  padding: 6px 12px !important;
+  border-right: 1px solid var(--border-soft) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+}
+
+.telemetry-cell:last-child {
+  border-right: none !important;
+}
+
+.telemetry,
+.status-bar {
+  height: auto !important;
+  min-height: 42px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  overflow: hidden;
+  margin-top: 0 !important;
+}
+
+.bottom-dock-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  width: 100%;
+  margin: 0;
+}
+
+.telemetry > span,
+.status-bar > span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 8px 12px;
+  border-right: 1px solid var(--border);
+  gap: 2px;
+}
+
+.telemetry > span:last-child,
+.status-bar > span:last-child {
+  border-right: none;
+}
+
+.telemetry > span b,
+.status-bar > span b,
+.telemetry > span strong,
+.status-bar > span strong {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.telemetry > span b,
+.status-bar > span b {
+  color: var(--muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 700;
+}
+
+.telemetry > span strong,
+.status-bar > span strong {
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.telemetry .risk,
+.status-bar .risk {
+  color: #fbbf24;
+}
+
+.telemetry .positive,
+.status-bar .positive {
+  color: #34d399;
+}
+
+.telemetry-cell b,
+.telemetry-cell strong {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.telemetry-cell b {
+  color: var(--muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 700;
+}
+
+.telemetry-cell strong {
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.telemetry-cell strong.risk {
+  color: #fbbf24;
+}
+
+.telemetry-cell strong.positive {
+  color: #34d399;
+}
+
+.telemetry-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  padding: 0 8px;
+  border-right: 1px solid var(--border);
+}
+
+.telemetry-item:last-child {
+  border-right: none;
+}
+
+.telemetry-label {
+  color: var(--muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+}
+
+.telemetry-value {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 11px;
+}
+
+/* ============================================================
+ * TIMELINE
+ * ============================================================ */
+
+.timeline {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  height: 76px;
+  min-height: 76px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 8px 12px;
+  overflow: hidden;
+  margin: 0;
+  z-index: auto;
+  box-sizing: border-box;
+}
+
+.timeline-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+}
+
+.timeline-title {
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.timeline-close {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 2px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: color var(--motion-fast);
+}
+
+.timeline-close:hover {
+  color: var(--text);
+}
+
+.timeline-close:active {
+  color: var(--accent);
+}
+
+.timeline-date-label {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  white-space: nowrap;
+}
+
+/* legacy range removed */
+
+/* legacy controls removed */
+
+/* legacy track removed */
+
+.space-y-3 > * + * {
+  margin-top: 0.75rem;
+}
+
+.p-2\.5 {
+  padding: 0.625rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
+}
+
+.bg-\[\#1C2530\] {
+  background-color: #1C2530;
+}
+
+.border {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.border-\[\#293442\] {
+  border-color: #293442;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.history-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  text-align: left;
+  gap: 0.25rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-left: 2px solid transparent;
+  border-radius: 8px;
+  padding: 8px 10px;
+  transition: background-color var(--motion-fast), border-color var(--motion-fast), color var(--motion-fast), transform var(--motion-fast);
+}
+
+.history-item:hover {
+  background: var(--panel2);
+  border-color: transparent;
+  color: var(--text);
+}
+
+.history-item.active,
+.history-item.history-active {
+  background: var(--accent-soft);
+  border-left: 2px solid var(--accent) !important;
+  border-color: transparent;
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.08);
+}
+
+.history-item.active .history-meta,
+.history-item.history-active .history-meta {
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.history-title {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.history-meta {
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.side-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 0 4px;
+}
+
+.side-section + .side-section {
+  border-top: 1px solid var(--border-soft);
+  padding-top: 12px;
+  margin-top: 10px;
+}
+
+.side-section h3 {
+  font-size: 9px;
+  letter-spacing: 0.7px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  padding: 0 4px;
+  font-weight: 700;
+}
+
+.new-session {
+  width: calc(100% - 0.75rem);
+  margin: 0 0.375rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+}
+
+.new-session kbd {
+  font-size: 8px;
+  opacity: 0.8;
+  vertical-align: middle;
+}
+
+/* ============================================================
+ * MAP WORKSPACE & OVERLAYS
+ * ============================================================ */
+
+.map-workspace {
+  --map-control-inset-x: 16px;
+  --map-control-inset-y: 16px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.floating-toolbar {
+  cursor: default;
+  position: absolute;
+  z-index: 20;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 6px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.floating-toolbar button {
+  height: 28px;
+  padding: 0 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 10px;
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+.floating-toolbar button:hover {
+  background: var(--panel2);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.floating-toolbar button.active-tool,
+.floating-toolbar button.active {
+  background: var(--accent-soft) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  box-shadow: inset 0 -2px var(--accent);
+}
+
+.workspace-panel {
+  position: absolute;
+  z-index: 30;
+  right: 10px;
+  top: 108px;
+  width: 222px;
+  max-height: calc(100% - 168px);
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 8px;
+}
+
+.workspace-panel h3 {
+  font-size: 9px;
+  letter-spacing: 0.7px;
+  color: var(--muted);
+  margin: 0 0 7px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ============================================================
+ * LAYER PANEL
+ * ============================================================ */
+
+.map-layer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background-color var(--motion-fast);
+}
+
+.map-layer:hover {
+  background: var(--surface-soft);
+  border-radius: var(--radius-sm);
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.map-layer > i {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 2px;
+}
+
+.map-layer > span {
+  min-width: 0;
+  flex: 1;
+  font-size: 9px;
+  color: var(--text);
+}
+
+.map-layer small {
+  display: block;
+  color: var(--muted);
+  font-size: 8px;
+  margin-top: 1px;
+}
+
+.map-layer input[type="range"] {
+  width: 35px;
+  accent-color: var(--accent);
+}
+
+.map-layer button {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 2px 4px;
+  border-radius: var(--radius-xs);
+  transition: all var(--motion-fast);
+}
+
+.map-layer button:hover {
+  background: var(--panel2);
+  color: var(--accent);
+}
+
+/* ============================================================
+ * MAP STATUS
+ * ============================================================ */
+
+.map-status {
+  position: absolute;
+  z-index: 40;
+  bottom: 160px;
+  left: var(--map-control-inset-x);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 8px;
+  font-size: 9px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+ * MODULE CONTROLS
+ * ============================================================ */
+
+.module-controls {
+  display: flex;
+  gap: 4px;
+  margin-top: 9px;
+}
+
+.module-controls button {
+  flex: 1;
+  font-size: 9px;
+  padding: 5px 4px;
+  border: 1px solid var(--border) !important;
+  background: var(--bg) !important;
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+.module-controls button:hover {
+  background: var(--panel2) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent);
+}
+
+.module-controls button.active {
+  background: var(--accent-soft) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent);
+}
+
+/* === Timeline Layout Fix (Single Row, Scrubber Expands) === */
+
+
+
+.timeline-date-label { white-space:nowrap; font-size:12px; }
+
+/* === Authoritative Timeline Panel === */
+/* duplicate timeline removed - authoritative at top */
+.timeline-header-row { display:flex; flex-direction:row; align-items:center; justify-content:space-between; height:20px; margin-bottom:6px; width:100%; }
+.timeline-controls { display:flex; flex-direction:row; align-items:center; gap:8px; flex:1; height:30px; min-height:30px; width:100%; flex-wrap:nowrap; }
+
+.timeline-left-controls { display:flex; align-items:center; gap:8px; flex:0 0 auto; }
+.timeline-right-controls { display:flex; align-items:center; gap:8px; flex:0 0 auto; }
+.timeline-scrubber-container { flex:1 1 auto; min-width:0; display:flex; align-items:center; gap:8px; }
+.timeline-slider-wrap { flex:1 1 auto; min-width:120px; display:flex; align-items:center; position:relative; }
+.timeline-slider { width:100%; height:5px; background:var(--surface-soft); border-radius:var(--radius-pill); accent-color:var(--accent); cursor:pointer; -webkit-appearance:none; appearance:none; }
+.timeline-slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:12px; height:12px; border-radius:50%; background:var(--accent); border:2px solid var(--panel); cursor:grab; margin-top:-4px; position:relative; z-index:2; }
+.timeline-slider::-moz-range-thumb { width:12px; height:12px; border-radius:50%; background:var(--accent); border:2px solid var(--panel); cursor:grab; position:relative; z-index:2; }
+.timeline-slider::-webkit-slider-runnable-track { height:5px; background:var(--surface-soft); border-radius:var(--radius-pill); }
+.timeline-slider::-moz-range-track { height:5px; background:var(--surface-soft); border-radius:var(--radius-pill); }
+.timeline-panel { height:76px; min-height:76px; overflow:visible; border-radius:var(--radius-lg); box-shadow:var(--shadow-md); padding:8px 12px; box-sizing:border-box; background:var(--panel); }
+
+/* Fixed-size timeline buttons per spec */
+.playback-btn { flex:0 0 34px; width:34px; height:30px; background: var(--panel2); border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; justify-content:center; }
+
+.compare-button { flex:0 0 92px; width:92px; height:30px; background: var(--panel2); border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; justify-content:center; gap:4px; }
+.timeline-date-label { flex:0 0 auto; white-space:nowrap; }
+.timeline-date-label { white-space:nowrap; font-size:12px; flex:0 0 auto; }
+
+.timeline-speed-controls { display:flex; align-items:center; gap:4px; flex:0 0 auto; }
+.timeline-speed-button { flex:0 0 34px; width:34px; height:30px; background:var(--panel2); border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; cursor:pointer; }
+.timeline-speed-button.active { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+.compare-button .compare-icon { font-size:12px; }
+.compare-button .compare-label { font-size:10px; font-weight:600; }
+.timeline-tooltip { position:absolute; bottom:26px; left:0; transform:translateX(-50%); pointer-events:none; background:var(--panel2); border:1px solid var(--border); border-radius:4px; padding:4px 6px; font-size:10px; white-space:nowrap; box-shadow:var(--shadow-sm); z-index:5; }
+
+
+/* Chat attachment - paperclip + drag & drop */
+.hidden { display:none !important; }
+.copilot-composer-wrapper { display:flex; flex-direction:column; flex-shrink:0; position:sticky; bottom:0; background:var(--panel); border-top:1px solid var(--border); padding:12px; gap:6px; }
+.attached-chips { display:flex; flex-wrap:wrap; gap:4px; }
+.attached-chip { font-size:10px; background:var(--panel2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:2px 6px; display:flex; align-items:center; gap:4px; color:var(--text); }
+.paperclip-btn { padding:6px; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; border-radius:var(--radius-sm); }
+.paperclip-btn:hover { color:var(--accent); background:var(--panel2); }
+.drag-overlay { pointer-events:none; position:fixed; inset:0; z-index:50; border:4px solid var(--accent); background:rgba(96,165,250,0.1); display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; color:var(--accent); }
+
+.chat-collapsed-tab, .copilot-collapsed-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 14px;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: 1;
+}
+.chat-collapsed-tab {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+}
+.chat-collapsed-tab:hover, .copilot-collapsed-tab:hover {
+  background: var(--panel2);
+  border-color: var(--border);
+  color: var(--text);
+  opacity: 1;
+}
+.copilot-collapsed-tab {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+}
+.left-sidebar:has(.chat-collapsed-tab) { overflow: visible; }
+.copilot-dock:has(.copilot-collapsed-tab) { overflow: visible; }
+.left-sidebar.workspace-dock, .right-dock {
+  transition: width 0.2s ease;
+}
