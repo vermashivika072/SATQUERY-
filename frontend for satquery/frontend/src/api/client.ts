@@ -1,5 +1,5 @@
-const API_ROOT = 'https://satquery-88xa.onrender.com';
-export const API_BASE = `${API_ROOT}/api`;
+export const API_BASE = 'https://satquery-88xa.onrender.com/api';
+
 
 export const AUTH_EXPIRED_EVENT = 'geoai-auth-expired';
 
