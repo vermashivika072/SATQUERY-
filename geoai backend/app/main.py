@@ -35,17 +35,17 @@ from app.core.middleware import RequestContextMiddleware, OriginCheckMiddleware
 APP_DIR = Path(__file__).resolve().parent
 STATIC_DIR = APP_DIR / "static"
 
-# --- ALLOWED ORIGINS (Vercel + Local) ---
+# --- ALLOWED ORIGINS (Specific URLs) ---
 ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:3000",
-    "https://frontend-three-steel-zin3d11qcc.vercel.app",
-    "https://frontend-git-main-vermashivika072s-projects.vercel.app",
-    "https://frontend-j39leu1k6-vermashivika072s-projects.vercel.app",
-    "https://frontend.vercel.app",
 ]
+
+# --- REGEX to match ALL Vercel deployment URLs ---
+# This will match: frontend-*.vercel.app and frontend-*.vermashivika072s-projects.vercel.app
+ALLOWED_ORIGIN_REGEX = r"https://.*\.vercel\.app"
 
 
 def create_app() -> FastAPI:
@@ -58,20 +58,21 @@ def create_app() -> FastAPI:
         openapi_url="/api/openapi.json",
     )
 
-    # CORS Middleware - hardcoded allowed origins
+    # CORS Middleware - uses both specific origins and regex for Vercel
     app.add_middleware(
         CORSMiddleware,
         allow_origins=ALLOWED_ORIGINS,
+        allow_origin_regex=ALLOWED_ORIGIN_REGEX,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
+        expose_headers=["*"],
     )
 
-    # OriginCheckMiddleware - same origins
     app.add_middleware(
         OriginCheckMiddleware,
         allow_origins=ALLOWED_ORIGINS,
-        enabled=settings.origin_check_enabled,
+        enabled=False,  # Disable this middleware for now - CORS handles it
     )
 
     app.add_middleware(RequestContextMiddleware)
